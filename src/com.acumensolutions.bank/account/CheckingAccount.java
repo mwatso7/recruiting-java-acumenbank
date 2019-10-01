@@ -10,6 +10,7 @@ public class CheckingAccount {
 	}
 
 	public void transfer(CheckingAccount destinationAccount, double amount) {
+		withdraw(amount);
 		destinationAccount.deposit(amount);
 	}
 
