@@ -1,13 +1,19 @@
 package account;
 
-public class CheckingAccount implements BankAccount{
-
+public class SavingsAccount implements BankAccount{
+	
 	private String ownerName;
 	private double balance;
+	private double interestRate;
 	
-	public CheckingAccount(String ownerName, double balance) {
+	public SavingsAccount(String ownerName, double balance, double interestRate) {
 		this.ownerName = ownerName;
 		this.balance = balance;
+		this.interestRate = interestRate;
+	}
+	
+	public void applyInterest(int numberOfYears) {
+		balance = Math.pow((1 + interestRate / numberOfYears), numberOfYears) * balance;
 	}
 
 	@Override
@@ -24,7 +30,7 @@ public class CheckingAccount implements BankAccount{
 		this.balance += amount;
 	}
 
-	public void withdraw(double amount) {
+	private void withdraw(double amount) {
 		if (amount < 0) {
 			throw new IllegalArgumentException("Cannot withdraw a negative amount");
 		}
@@ -43,7 +49,9 @@ public class CheckingAccount implements BankAccount{
 	
 	@Override
 	public void printAccountDetails() {
-		System.out.format("Checking Account for %s:\r\n", ownerName);
+		System.out.format("Savings Account for %s:\r\n", ownerName);
 		System.out.format("Balance: $%.2f\r\n", balance);
+		System.out.format("Interest Rate: %.2f%% \n", interestRate*100.0);
 	}
+
 }
