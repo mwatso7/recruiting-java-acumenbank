@@ -11,7 +11,7 @@ public class SavingsAccount extends BankAccount{
 	}
 	
 	public void applyInterest(int numberOfYears) {
-		balance = Math.pow((1 + interestRate / 1), numberOfYears) * balance;
+		balance = Math.pow((1 + interestRate), numberOfYears) * balance;
 	}
 	
 	public void applyInterest(int numberOfYears, int numberOfTimesCompounded) {
