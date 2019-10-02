@@ -1,9 +1,7 @@
 package account;
 
-public class SavingsAccount implements BankAccount{
+public class SavingsAccount extends BankAccount{
 	
-	private String ownerName;
-	private double balance;
 	private double interestRate;
 	
 	public SavingsAccount(String ownerName, double balance, double interestRate) {
@@ -13,44 +11,21 @@ public class SavingsAccount implements BankAccount{
 	}
 	
 	public void applyInterest(int numberOfYears) {
-		balance = Math.pow((1 + interestRate / numberOfYears), numberOfYears) * balance;
+		balance = Math.pow((1 + interestRate / 1), numberOfYears) * balance;
 	}
-
-	@Override
-	public void transfer(BankAccount destinationAccount, double amount) {
-		withdraw(amount);
-		destinationAccount.deposit(amount);
+	
+	public void applyInterest(int numberOfYears, int numberOfTimesCompounded) {
+		balance = Math.pow((1 + interestRate / numberOfTimesCompounded), (numberOfTimesCompounded * numberOfYears)) * balance;
 	}
-
-	@Override
-	public void deposit(double amount) {
-		if (amount < 0) {
-			throw new IllegalArgumentException("Cannot deposit a negative amount");
-		}
-		this.balance += amount;
-	}
-
-	private void withdraw(double amount) {
-		if (amount < 0) {
-			throw new IllegalArgumentException("Cannot withdraw a negative amount");
-		}
-		this.balance -= amount;
-	}
-
-	@Override
-	public String getOwnerName() {
-		return this.ownerName;
-	}
-
-	@Override
-	public double getBalance() {
-		return this.balance;
+	
+	public double getInterestRate() {
+		return interestRate;
 	}
 	
 	@Override
 	public void printAccountDetails() {
-		System.out.format("Savings Account for %s:\r\n", ownerName);
-		System.out.format("Balance: $%.2f\r\n", balance);
+		System.out.print("Savings ");
+		super.printAccountDetails();
 		System.out.format("Interest Rate: %.2f%% \n", interestRate*100.0);
 	}
 
