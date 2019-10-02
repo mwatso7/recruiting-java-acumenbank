@@ -6,7 +6,7 @@ public abstract class BankAccount{
 	protected double balance;
 	
 	public void transfer(BankAccount destinationAccount, double amount) {
-		withdraw(amount);
+		withdrawal(amount);
 		destinationAccount.deposit(amount);
 	}
 
@@ -17,7 +17,7 @@ public abstract class BankAccount{
 		this.balance += amount;
 	}
 
-	private void withdraw(double amount) {
+	protected void withdrawal(double amount) {
 		if (amount < 0) {
 			throw new IllegalArgumentException("Cannot withdraw a negative amount");
 		}
